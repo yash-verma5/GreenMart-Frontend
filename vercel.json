@@ -1,4 +1,5 @@
 {
+    "//": "Explicitly set output directory for Create React App",
     "outputDirectory": "build",
     "rewrites": [
         {
