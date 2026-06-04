@@ -5,7 +5,7 @@ This is the frontend of our final cdac project 'GreenMart'
 
 ## Links
 For the backend please go here<br>
-https://github.com/D6-GreenMart/GreenMart-Backend<br><br>
+https://github.com/yash-verma5/GreenMart-Backend<br><br>
 For the project documentation please go here<br>
 https://drive.google.com/file/d/1H6oIPP48zm1A4mCptkiUe8_rTSrzwNHO/view?usp=sharing<br>
 
@@ -31,7 +31,7 @@ Deploy this repo from the `deploy/showcase` branch.
 Use these Vercel settings:
 
 ```txt
-Framework Preset: Vite
+Framework Preset: None
 Build Command: npm run build
 Output Directory: dist
 ```
