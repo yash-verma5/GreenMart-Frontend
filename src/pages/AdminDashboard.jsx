@@ -1,5 +1,6 @@
 // src/pages/AdminDashboard.jsx
 import { useState, useEffect } from 'react';
+import { API_BASE_URL } from '../services/config';
 import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 
@@ -17,7 +18,7 @@ const AdminDashboard = () => {
   // Fetch pending products
   const fetchPendingProducts = async () => {
     try {
-      const response = await fetch('http://localhost:8080/api/v1/products/pending', {
+      const response = await fetch(`${API_BASE_URL}/products/pending`, {
         headers: {
           'Content-Type': 'application/json'
         }
@@ -39,7 +40,7 @@ const AdminDashboard = () => {
   // Fetch product categories
   const fetchCategories = async () => {
     try {
-      const response = await fetch('http://localhost:8080/api/v1/categories', {
+      const response = await fetch(`${API_BASE_URL}/categories`, {
         headers: {
           'Content-Type': 'application/json'
         }
@@ -72,7 +73,7 @@ const AdminDashboard = () => {
         throw new Error('User not authenticated');
       }
       const response = await fetch(
-        `http://localhost:8080/api/v1/products/${productId}/status?status=${newStatus}`,
+        `${API_BASE_URL}/products/${productId}/status?status=${newStatus}`,
         {
           method: 'PUT',
           headers: {

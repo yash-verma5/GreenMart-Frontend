@@ -1,5 +1,6 @@
 // src/pages/ProductDetails.jsx
 import { useState, useEffect, useContext } from 'react';
+import { API_BASE_URL } from '../services/config';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../context/AuthContext';
@@ -28,7 +29,7 @@ const ProductDetails = () => {
 
   // Fetch product details
   useEffect(() => {
-    fetch(`http://localhost:8080/api/v1/products/${productId}`)
+    fetch(`${API_BASE_URL}/products/${productId}`)
       .then((res) => {
         if (!res.ok) {
           throw new Error(`Error fetching product details: ${res.status}`);
@@ -49,7 +50,7 @@ const ProductDetails = () => {
 
   // Fetch reviews for this product and calculate the average rating
   useEffect(() => {
-    fetch(`http://localhost:8080/api/v1/reviews/product/${productId}`)
+    fetch(`${API_BASE_URL}/reviews/product/${productId}`)
       .then((res) => {
         if (!res.ok) {
           throw new Error(`Error fetching reviews: ${res.status}`);
@@ -83,7 +84,7 @@ const ProductDetails = () => {
         throw new Error('User not authenticated');
       }
       const response = await fetch(
-        `http://localhost:8080/api/v1/cart/add/${productId}?quantity=${quantity}`,
+        `${API_BASE_URL}/cart/add/${productId}?quantity=${quantity}`,
         {
           method: 'POST',
           headers: {
@@ -121,7 +122,7 @@ const ProductDetails = () => {
         comment: comment,
       };
 
-      const response = await fetch('http://localhost:8080/api/v1/reviews', {
+      const response = await fetch(`${API_BASE_URL}/reviews`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -139,7 +140,7 @@ const ProductDetails = () => {
       setRating(5);
       setComment('');
       // Re-fetch reviews to update the average rating and review list
-      fetch(`http://localhost:8080/api/v1/reviews/product/${productId}`)
+      fetch(`${API_BASE_URL}/reviews/product/${productId}`)
         .then((res) => res.json())
         .then((data) => {
           setReviews(data);

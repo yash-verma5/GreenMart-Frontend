@@ -1,5 +1,6 @@
 // src/pages/VendorAddProduct.jsx
 import { useState, useEffect } from 'react';
+import { API_BASE_URL } from '../services/config';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
@@ -19,7 +20,7 @@ const VendorAddProduct = () => {
 
   // Fetch categories on mount
   useEffect(() => {
-    fetch('http://localhost:8080/api/v1/categories')
+    fetch(`${API_BASE_URL}/categories`)
       .then((res) => {
         if (!res.ok) {
           throw new Error(`Error fetching categories: ${res.status}`);
@@ -74,7 +75,7 @@ const VendorAddProduct = () => {
     };
 
     try {
-      const response = await fetch('http://localhost:8080/api/v1/products', {
+      const response = await fetch(`${API_BASE_URL}/products`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

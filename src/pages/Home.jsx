@@ -1,5 +1,6 @@
 // src/pages/Home.jsx
 import { useState, useEffect } from 'react';
+import { API_BASE_URL } from '../services/config';
 import { Link } from 'react-router-dom';
 
 const Home = () => {
@@ -8,7 +9,7 @@ const Home = () => {
 
   useEffect(() => {
     // Adjust the URL if needed.
-    fetch('http://localhost:8080/api/v1/categories')
+    fetch(`${API_BASE_URL}/categories`)
       .then((res) => {
         if (!res.ok) {
           throw new Error(`Error fetching categories: ${res.status}`);

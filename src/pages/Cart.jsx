@@ -1,5 +1,6 @@
 // src/pages/Cart.jsx
 import { useState, useEffect } from 'react';
+import { API_BASE_URL } from '../services/config';
 import { toast } from 'react-toastify';
 
 const Cart = () => {
@@ -14,7 +15,7 @@ const Cart = () => {
   // Function to fetch cart data and enrich each item with its product price and available quantity
   const fetchCart = async () => {
     try {
-      const response = await fetch('http://localhost:8080/api/v1/cart', {
+      const response = await fetch(`${API_BASE_URL}/cart`, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
@@ -31,7 +32,7 @@ const Cart = () => {
         const itemsWithDetails = await Promise.all(
           data.cartItems.map(async (item) => {
             try {
-              const prodRes = await fetch(`http://localhost:8080/api/v1/products/${item.productId}`);
+              const prodRes = await fetch(`${API_BASE_URL}/products/${item.productId}`);
               if (!prodRes.ok) {
                 throw new Error(`Error fetching product details for ${item.productId}: ${prodRes.status}`);
               }
@@ -70,7 +71,7 @@ const Cart = () => {
   // Handler to update a cart item's quantity
   const handleUpdateQuantity = async (cartItemId, newQuantity) => {
     try {
-      const response = await fetch(`http://localhost:8080/api/v1/cart/update/${cartItemId}`, {
+      const response = await fetch(`${API_BASE_URL}/cart/update/${cartItemId}`, {
         method: 'PUT', // or 'POST' depending on your backend implementation
         headers: {
           'Content-Type': 'application/json',
@@ -92,7 +93,7 @@ const Cart = () => {
   // Handler to remove a cart item
   const handleRemoveItem = async (cartItemId) => {
     try {
-      const response = await fetch(`http://localhost:8080/api/v1/cart/remove/${cartItemId}`, {
+      const response = await fetch(`${API_BASE_URL}/cart/remove/${cartItemId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`
@@ -112,7 +113,7 @@ const Cart = () => {
   // Handler to clear the entire cart
   const handleClearCart = async () => {
     try {
-      const response = await fetch('http://localhost:8080/api/v1/cart/clear', {
+      const response = await fetch(`${API_BASE_URL}/cart/clear`, {
         method: 'DELETE', // or 'POST' if your backend uses that method
         headers: {
           'Authorization': `Bearer ${token}`
@@ -136,7 +137,7 @@ const Cart = () => {
         toast.error('Please provide a shipping address.');
         return;
       }
-      const response = await fetch('http://localhost:8080/api/v1/orders', {
+      const response = await fetch(`${API_BASE_URL}/orders`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

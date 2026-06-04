@@ -1,5 +1,6 @@
 // src/pages/AdminAddCategory.jsx
 import { useState } from 'react';
+import { API_BASE_URL } from '../services/config';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
@@ -36,7 +37,7 @@ const AdminAddCategory = () => {
     };
 
     try {
-      const response = await fetch('http://localhost:8080/api/v1/categories', {
+      const response = await fetch(`${API_BASE_URL}/categories`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

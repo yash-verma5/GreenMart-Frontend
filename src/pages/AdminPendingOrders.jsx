@@ -1,5 +1,6 @@
 // src/pages/AdminPendingOrders.jsx
 import { useState, useEffect } from 'react';
+import { API_BASE_URL } from '../services/config';
 import { toast } from 'react-toastify';
 
 const AdminPendingOrders = () => {
@@ -10,7 +11,7 @@ const AdminPendingOrders = () => {
   // Function to fetch pending orders and enrich with customer details
   const fetchPendingOrders = async () => {
     try {
-      const res = await fetch('http://localhost:8080/api/v1/orders/pending', {
+      const res = await fetch(`${API_BASE_URL}/orders/pending`, {
         headers: { 'Content-Type': 'application/json' },
       });
       if (!res.ok) {
@@ -23,7 +24,7 @@ const AdminPendingOrders = () => {
       const ordersWithUser = await Promise.all(
         ordersData.map(async (order) => {
           try {
-            const userRes = await fetch(`http://localhost:8080/api/v1/users/${order.userId}`, {
+            const userRes = await fetch(`${API_BASE_URL}/users/${order.userId}`, {
               headers: { 'Content-Type': 'application/json' },
             });
             if (!userRes.ok) {
@@ -57,7 +58,7 @@ const AdminPendingOrders = () => {
       if (!token) {
         throw new Error('User not authenticated');
       }
-      const res = await fetch(`http://localhost:8080/api/v1/orders/${orderId}/status/delivered`, {
+      const res = await fetch(`${API_BASE_URL}/orders/${orderId}/status/delivered`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

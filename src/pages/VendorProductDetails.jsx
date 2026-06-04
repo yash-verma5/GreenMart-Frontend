@@ -1,5 +1,6 @@
 // src/pages/VendorProductDetails.jsx
 import { useState, useEffect } from 'react';
+import { API_BASE_URL } from '../services/config';
 import { useParams, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
@@ -20,7 +21,7 @@ const VendorProductDetails = () => {
 
   // Fetch product details
   useEffect(() => {
-    fetch(`http://localhost:8080/api/v1/products/${productId}`)
+    fetch(`${API_BASE_URL}/products/${productId}`)
       .then((res) => {
         if (!res.ok) {
           throw new Error(`Error fetching product details: ${res.status}`);
@@ -41,7 +42,7 @@ const VendorProductDetails = () => {
 
   // Fetch reviews for this product and calculate average rating
   useEffect(() => {
-    fetch(`http://localhost:8080/api/v1/reviews/product/${productId}`)
+    fetch(`${API_BASE_URL}/reviews/product/${productId}`)
       .then((res) => {
         if (!res.ok) {
           throw new Error(`Error fetching reviews: ${res.status}`);
@@ -69,7 +70,7 @@ const VendorProductDetails = () => {
         throw new Error('User not authenticated');
       }
       const response = await fetch(
-        `http://localhost:8080/api/v1/products/${productId}/restock?quantity=${restockQuantity}`,
+        `${API_BASE_URL}/products/${productId}/restock?quantity=${restockQuantity}`,
         {
           method: 'PUT',
           headers: {

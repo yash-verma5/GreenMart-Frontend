@@ -1,5 +1,6 @@
 // src/pages/CategoryProducts.jsx
 import { useState, useEffect } from 'react';
+import { API_BASE_URL } from '../services/config';
 import { useParams, Link } from 'react-router-dom';
 
 const CategoryProducts = () => {
@@ -9,8 +10,7 @@ const CategoryProducts = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Adjust the URL as needed. Make sure your backend is running on localhost:8080.
-    fetch(`http://localhost:8080/api/v1/products/category/${categoryId}`)
+    fetch(`${API_BASE_URL}/products/category/${categoryId}`)
       .then((res) => {
         if (!res.ok) {
           throw new Error(`Error fetching products: ${res.status}`);

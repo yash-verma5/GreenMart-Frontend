@@ -1,5 +1,6 @@
 // src/pages/VendorDashboard.jsx
-import { useState, useEffect, useContext } from 'react';
+import { useContext, useState, useEffect } from 'react';
+import { API_BASE_URL } from '../services/config';
 import { AuthContext } from '../context/AuthContext';
 import { Link } from 'react-router-dom';
 
@@ -23,7 +24,7 @@ const VendorDashboard = () => {
     const token = localStorage.getItem('token');
 
     // Fetch all vendor products
-    fetch(`http://localhost:8080/api/v1/products/vendor/${vendorId}`, {
+    fetch(`${API_BASE_URL}/products/vendor/${vendorId}`, {
       headers: {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'
@@ -47,7 +48,7 @@ const VendorDashboard = () => {
       });
 
     // Fetch pending products for this vendor
-    fetch(`http://localhost:8080/api/v1/products/vendor/${vendorId}/pending`, {
+    fetch(`${API_BASE_URL}/products/vendor/${vendorId}/pending`, {
       headers: {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'

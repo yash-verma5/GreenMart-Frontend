@@ -1,5 +1,6 @@
 // src/pages/Login.jsx
 import { useState, useContext } from 'react';
+import { API_BASE_URL } from '../services/config';
 import { useNavigate, Link } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { login } from '../services/authService';
@@ -34,7 +35,7 @@ const Login = () => {
       console.log('User roles:', rolesArray);
 
       // 4. Fetch the full user details using the token from /users/me
-      const response = await fetch('http://localhost:8080/api/v1/users/me', {
+      const response = await fetch(`${API_BASE_URL}/users/me`, {
         headers: {
           'Authorization': `Bearer ${data.token}`,
           'Content-Type': 'application/json'

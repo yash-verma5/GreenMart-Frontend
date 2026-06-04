@@ -16,10 +16,10 @@ const Products = () => {
     try {
       let res;
       if (searchKeyword.trim() !== '') {
-        res = await api.get(`http://localhost:8080/api/v1/products/search?keyword=${encodeURIComponent(searchKeyword)}`);
+        res = await api.get(`/products/search?keyword=${encodeURIComponent(searchKeyword)}`);
       } else {
         // Adjust the endpoint if needed (e.g., fetch all products)
-        res = await api.get('http://localhost:8080/api/v1/products');
+        res = await api.get(`/products`);
       }
       setProducts(res.data);
       setError(null);
